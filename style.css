@@ -1,0 +1,29 @@
+/* style.css */
+
+button {
+  background-color: #4caf50; /* Vert */
+  color: white; /* Texte blanc */
+  padding: 15px 32px; /* Espacement */
+  font-size: 16px; /* Taille de police */
+  margin: 4px 2px; /* Marge */
+  border: none; /* Pas de bordure */
+  border-radius: 5px; /* Coins arrondis */
+}
+
+button:hover {
+  background-color: #45a049; /* Couleur au survol */
+}
+
+label {
+  font-size: 14px; /* Taille de la police pour l'étiquette */
+  padding: 10px; /* Espacement autour du texte */
+  color: #333; /* Couleur du texte */
+  margin-bottom: 10px; /* Marge en bas pour espacer avec d'autres éléments */
+}
+
+/* Pour centrer le contenu d'un GtkBox, utilisez l'alignement vertical et horizontal */
+.vbox {
+  vertical-align: center;
+  horizontal-align: center;
+  spacing: 5; /* Espacement entre les éléments de la boîte */
+}
