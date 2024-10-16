@@ -27,8 +27,5 @@ Pour installer les bibliothèques nécessaires sous Ubuntu, exécutez la command
 sudo apt-get install libgtk-3-dev sqlite3 libsqlite3-dev
 
 
-## Contributeurs
-
-- **Razakanaivo Andry Malala**
 
 
