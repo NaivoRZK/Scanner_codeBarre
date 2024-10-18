@@ -15,6 +15,8 @@ int main(int argc, char *argv[]) {
     // Créer la fenêtre principale de l'application
     GtkWidget *main_window = create_window(); 
 
+    
+
     // Afficher la fenêtre et tous ses widgets enfants
     gtk_widget_show_all(main_window); 
 

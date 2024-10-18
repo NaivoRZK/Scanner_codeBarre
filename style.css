@@ -1,29 +1,21 @@
 /* style.css */
-
-button {
-  background-color: #4caf50; /* Vert */
-  color: white; /* Texte blanc */
-  padding: 15px 32px; /* Espacement */
-  font-size: 16px; /* Taille de police */
-  margin: 4px 2px; /* Marge */
-  border: none; /* Pas de bordure */
-  border-radius: 5px; /* Coins arrondis */
+window {
+  background-color: #f0f0f0; /* Couleur de fond de la fenêtre */
 }
 
-button:hover {
-  background-color: #45a049; /* Couleur au survol */
+.treeview {
+  border: 2px solid white; /* Bordure blanche autour du TreeView */
+  margin: 10px; /* Marge autour du TreeView */
 }
 
-label {
-  font-size: 14px; /* Taille de la police pour l'étiquette */
-  padding: 10px; /* Espacement autour du texte */
-  color: #333; /* Couleur du texte */
-  margin-bottom: 10px; /* Marge en bas pour espacer avec d'autres éléments */
+.treeview .row {
+  border-bottom: 1px solid white; /* Bordure blanche entre les lignes */
 }
 
-/* Pour centrer le contenu d'un GtkBox, utilisez l'alignement vertical et horizontal */
-.vbox {
-  vertical-align: center;
-  horizontal-align: center;
-  spacing: 5; /* Espacement entre les éléments de la boîte */
+.treeview .row:hover {
+  background-color: #d9d9d9; /* Changement de couleur au survol */
+}
+
+.treeview .column {
+  padding: 10px; /* Espacement intérieur pour les cellules */
 }
