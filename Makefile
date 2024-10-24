@@ -51,6 +51,6 @@ $(OBJ_DIR)/gestionPdf.o: $(SRC_DIR)/gestionPdf.c includes/gestionPdf.h
 clean:
 	rm -f $(OBJ_DIR)/*.o $(TARGET)  # Supprimer les fichiers objets et l'exécutable
 
-# Règle pour nettoyage complet, y compris la base de données
+# Règle pour nettoyage complet, y compris la base de données	
 clean-all: clean
 	rm -f db/$(DB_FILE)  # Supprimer la base de données

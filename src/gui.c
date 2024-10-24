@@ -30,7 +30,18 @@ static void on_button_click(GtkWidget *widget, gpointer data) {
     // Ajouter le produit dans la base de données
     add_item("db/inventaire.db", code_barre);  
     gtk_label_set_text(GTK_LABEL(code_label), code_barre);  // Mettre à jour le label avec le code-barres scanné
-    gtk_label_set_text(GTK_LABEL(message_label), "Produit ajouté avec succès !"); // Afficher un message dans l'interface
+
+    // Créer un message personnalisé avec le nom du produit
+    char *message = g_strdup_printf("%s  est ajouté avec succès !", code_barre);
+    gtk_label_set_text(GTK_LABEL(message_label), message); // Afficher le message personnalisé
+
+    // Libérer la mémoire allouée pour le message
+    g_free(message);
+
+    // Réinitialiser le champ de saisie après ajout
+    gtk_entry_set_text(GTK_ENTRY(entry_code_barre), "");  // Effacer le texte de l'entrée
+    // Redonner le focus au champ de saisie après l'ajout
+    gtk_widget_grab_focus(entry_code_barre);
 }
 
 // Fonction pour afficher le menu lors du clic sur le bouton hamburger
@@ -41,9 +52,7 @@ static void on_menu_button_click(GtkWidget *widget, gpointer data) {
     menu = gtk_menu_new();
 
     // Créer des éléments de menu
-    menu_item = gtk_menu_item_new_with_label("Ajouter Matériel");
-    g_signal_connect(menu_item, "activate", G_CALLBACK(on_menu_item_selected), "matériel");
-    gtk_menu_shell_append(GTK_MENU_SHELL(menu), menu_item);
+ 
 
     menu_item = gtk_menu_item_new_with_label("Tous les Matériels");
     g_signal_connect(menu_item, "activate", G_CALLBACK(on_menu_item_selected), "tous_materiaux");
@@ -53,10 +62,6 @@ static void on_menu_button_click(GtkWidget *widget, gpointer data) {
     g_signal_connect(menu_item, "activate", G_CALLBACK(open_help_window), NULL); // Ouvrir la fenêtre d'aide
     gtk_menu_shell_append(GTK_MENU_SHELL(menu), menu_item);
 
-    menu_item = gtk_menu_item_new_with_label("Suppression Matériel");
-    g_signal_connect(menu_item, "activate", G_CALLBACK(on_menu_item_selected), "suppression");
-    gtk_menu_shell_append(GTK_MENU_SHELL(menu), menu_item);
-
     gtk_widget_show_all(menu); // Afficher tous les éléments du menu
     gtk_menu_popup_at_pointer(GTK_MENU(menu), NULL); // Afficher le menu à la position du pointeur
 }
@@ -64,16 +69,12 @@ static void on_menu_button_click(GtkWidget *widget, gpointer data) {
 // Fonction pour gérer l'action de menu
 static void on_menu_item_selected(GtkWidget *widget, gpointer data) {
     const char *menu_item = (const char *)data;
-    if (g_strcmp0(menu_item, "matériel") == 0) {
-        gtk_label_set_text(GTK_LABEL(message_label), "Gestion du Matériel sélectionnée.");
-    } else if (g_strcmp0(menu_item, "tous_materiaux") == 0) {  // Gestion pour l'option "Tous les Matériels"
+     if (g_strcmp0(menu_item, "tous_materiaux") == 0) {  // Gestion pour l'option "Tous les Matériels"
         gtk_label_set_text(GTK_LABEL(message_label), "Tous les Matériels sélectionnés.");
         show_all_items(); // Appel de la nouvelle fonction pour afficher tous les matériels
     } else if (g_strcmp0(menu_item, "aide") == 0) {
         gtk_label_set_text(GTK_LABEL(message_label), "Aide sélectionnée.");
-    } else if (g_strcmp0(menu_item, "suppression") == 0) {
-        gtk_label_set_text(GTK_LABEL(message_label), "Capturer des materiels.");
-    }
+    } 
 }
 
 // Fonction pour ouvrir la fenêtre d'aide
@@ -152,6 +153,9 @@ GtkWidget* create_window() {
     // Créer une entrée pour le code-barres
     entry_code_barre = gtk_entry_new();
     gtk_box_pack_start(GTK_BOX(vbox), entry_code_barre, TRUE, FALSE, 5); // Prendre toute la largeur de la ligne
+    // Mettre le focus sur le champ de saisie dès le démarrage
+    gtk_widget_grab_focus(entry_code_barre);  // Cette ligne permet de donner le focus au champ de texte
+
 
     // Ajouter un bouton pour scanner et ajouter du matériel
     button = gtk_button_new_with_label("Ajout Matériel");
@@ -178,7 +182,7 @@ GtkWidget* create_window() {
     gtk_box_pack_start(GTK_BOX(vbox), message_label, TRUE, FALSE, 0); // Prendre toute la largeur de la ligne
 
     // --- Ajout de l'image centrée sous le champ de saisie ---
-    GtkWidget *image = gtk_image_new_from_file("images/COD.png"); // Remplacez par le chemin de votre image
+    GtkWidget *image = gtk_image_new_from_file("images/image.png"); // Remplacez par le chemin de votre image
 
     // Créer une boîte horizontale pour centrer l'image
     GtkWidget *image_hbox = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0);
